@@ -2,7 +2,7 @@ export const Header = () => {
   return (
     <header className="flex items-center justify-between px-4 pt-6 pb-2">
       <div className="flex items-center gap-2">
-        <div className="bg-primary/10 p-2 rounded-xl">
+        <div className="bg-primary/10 p-2 rounded-xl flex justify-center">
           <span className="material-symbols-outlined text-primary text-2xl">coffee</span>
         </div>
         <h1 className="text-xl font-bold tracking-tight text-coffee-bean dark:text-slate-100">Coffeeland</h1>
