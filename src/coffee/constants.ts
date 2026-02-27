@@ -1,0 +1,7 @@
+export const COFFEE_METHODS = Object.freeze({
+  ALL: 'ALL',
+  ESPRESSO: 'ESPRESSO',
+  COLD_BREW: 'COLD_BREW',
+  POUROVER: 'POUROVER',
+  LATTE_ART: 'LATTE_ART',
+});

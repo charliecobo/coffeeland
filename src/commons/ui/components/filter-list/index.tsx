@@ -1,3 +1,6 @@
+import { COFFEE_METHODS } from '../../../../coffee/constants';
+import { RadioChips } from '../radio-chips';
+
 export const FilterList = () => {
   return (
     <>
@@ -12,23 +15,18 @@ export const FilterList = () => {
         </div>
       </div>
 
-      <div className="flex gap-3 px-4 pb-6 overflow-x-auto no-scrollbar">
-        <button className="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/50 hover:text-white">
-          All
-        </button>
-        <button className="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-coffee-cream dark:bg-primary/10 text-coffee-bean dark:text-slate-200 font-medium text-sm hover:bg-primary/50 hover:text-white">
-          Espresso
-        </button>
-        <button className="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-coffee-cream dark:bg-primary/10 text-coffee-bean dark:text-slate-200 font-medium text-sm hover:bg-primary/50 hover:text-white">
-          Cold Brew
-        </button>
-        <button className="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-coffee-cream dark:bg-primary/10 text-coffee-bean dark:text-slate-200 font-medium text-sm hover:bg-primary/50 hover:text-white">
-          Pourover
-        </button>
-        <button className="flex h-10 shrink-0 items-center justify-center px-5 rounded-full bg-coffee-cream dark:bg-primary/10 text-coffee-bean dark:text-slate-200 font-medium text-sm hover:bg-primary/50 hover:text-white">
-          Latte Art
-        </button>
-      </div>
+      <RadioChips
+        name="type"
+        defaultValue="ALL"
+        // onChange={handleChange}
+        options={[
+          { id: '1', label: COFFEE_METHODS.ALL.replaceAll('_', ' '), value: COFFEE_METHODS.ALL },
+          { id: '2', label: COFFEE_METHODS.ESPRESSO.replaceAll('_', ' '), value: COFFEE_METHODS.ESPRESSO },
+          { id: '3', label: COFFEE_METHODS.COLD_BREW.replaceAll('_', ' '), value: COFFEE_METHODS.COLD_BREW },
+          { id: '4', label: COFFEE_METHODS.POUROVER.replaceAll('_', ' '), value: COFFEE_METHODS.POUROVER },
+          { id: '5', label: COFFEE_METHODS.LATTE_ART.replaceAll('_', ' '), value: COFFEE_METHODS.LATTE_ART },
+        ]}
+      />
     </>
   );
 };
