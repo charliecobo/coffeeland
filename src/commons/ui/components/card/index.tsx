@@ -1,4 +1,6 @@
-export const Card = () => {
+import type { Coffee } from '../../../../coffee/core/interfaces';
+
+export const Card = ({ name }: Coffee) => {
   return (
     <div className="bg-white dark:bg-white/5 rounded-2xl p-3 flex gap-4 shadow-sm border border-coffee-cream dark:border-primary/10">
       <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0">
@@ -18,7 +20,7 @@ export const Card = () => {
               bookmark
             </span>
           </div>
-          <h3 className="font-bold text-coffee-bean dark:text-slate-100 mt-1">Caramel Macchiato</h3>
+          <h3 className="font-bold text-coffee-bean dark:text-slate-100 mt-1">{name.toUpperCase()}</h3>
           <p className="text-xs text-coffee-bean/60 dark:text-slate-400">
             Sweet vanilla with espresso &amp; caramel drizzle
           </p>

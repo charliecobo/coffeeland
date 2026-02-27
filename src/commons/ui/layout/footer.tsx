@@ -36,6 +36,20 @@ export const Footer = () => {
           <span className="material-symbols-outlined text-2xl">explore</span>
           <span className="text-[10px] font-medium">Explore</span>
         </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            clsx('flex flex-col items-center gap-1', {
+              'text-primary': isActive,
+              'text-coffee-bean/40 dark:text-slate-400': !isActive,
+            })
+          }
+          to="/login"
+          replace
+          viewTransition
+        >
+          <span className="material-symbols-outlined text-2xl">exit_to_app</span>
+          <span className="text-[10px] font-medium">Sign Out</span>
+        </NavLink>
         <a className="flex flex-col items-center gap-1 text-coffee-bean/40 dark:text-slate-400" href="#">
           <span className="material-symbols-outlined text-2xl">bookmark</span>
           <span className="text-[10px] font-medium">Saved</span>

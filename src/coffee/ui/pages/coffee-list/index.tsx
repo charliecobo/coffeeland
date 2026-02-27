@@ -1,21 +1,22 @@
-import { useEffect } from 'react';
+import { Suspense, useState } from 'react';
+
 import { Card } from '../../../../commons/ui/components/card';
 import { FilterList } from '../../../../commons/ui/components/filter-list';
 import { List } from '../../../../commons/ui/components/list';
-import { http } from '../../../../commons/core/services/http';
+
+import { coffeeService } from '../../../core/services/coffee.service';
+import type { Coffee } from '../../../core/interfaces';
+import ErrorBoundaryCoffeeList from '../../errors/coffee-list';
 
 export const CoffeeList = () => {
-  useEffect(() => {
-    http.get('/coffee').then(res => {
-      console.log(res.data);
-    });
-  }, []);
+  const [retryKey, setRetryKey] = useState(0);
 
-  useEffect(() => {
-    http.get('/resource').then(res => {
-      console.log(res.data);
-    });
-  }, []);
+  const fetchCoffee = coffeeService.getCoffeeList({});
+
+  const handleRetry = () => {
+    setRetryKey(prev => prev + 1);
+  };
+
   return (
     <>
       <FilterList />
@@ -25,9 +26,16 @@ export const CoffeeList = () => {
         <button className="text-primary text-sm font-semibold">View All</button>
       </div>
 
-      <List>
-        <Card />
-      </List>
+      <ErrorBoundaryCoffeeList onReset={handleRetry}>
+        <Suspense fallback={<div>⏳ Loading coffee...</div>}>
+          <List<Coffee>
+            key={retryKey}
+            fetchData={fetchCoffee}
+            RenderItem={data => <Card {...data} />}
+            getKey={post => post.id}
+          />
+        </Suspense>
+      </ErrorBoundaryCoffeeList>
     </>
   );
 };
