@@ -1,25 +1,31 @@
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { useFormik } from 'formik';
 
 import { Card } from '../../../../commons/ui/components/card';
 import { FilterList } from '../../../../commons/ui/components/filter-list';
 import { List } from '../../../../commons/ui/components/list';
 
 import { coffeeService } from '../../../core/services/coffee.service';
-import type { Coffee } from '../../../core/interfaces';
+import type { Coffee, GetCoffeListParams } from '../../../core/interfaces';
 import ErrorBoundaryCoffeeList from '../../errors/coffee-list';
+import { COFFEE_METHODS } from '../../../constants';
 
 export const CoffeeList = () => {
   const [retryKey, setRetryKey] = useState(0);
-
-  const fetchCoffee = coffeeService.getCoffeeList({});
+  const [filters, setFilters] = useState<GetCoffeListParams>({
+    term: '',
+    method: COFFEE_METHODS.ALL,
+  });
 
   const handleRetry = () => {
     setRetryKey(prev => prev + 1);
   };
 
+  const fetchCoffee = coffeeService.getCoffeeList({ ...filters });
+
   return (
     <>
-      <FilterList />
+      <FilterList setFilters={setFilters} filters={filters} />
 
       <div className="px-4 pb-4 flex items-center justify-between">
         <h2 className="text-lg font-bold text-coffee-bean dark:text-slate-100">Popular Recipes</h2>
