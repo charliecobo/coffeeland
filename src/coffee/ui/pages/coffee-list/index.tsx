@@ -1,5 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from 'react';
-import { useFormik } from 'formik';
+import { Suspense, useEffect, useState } from 'react';
 
 import { Card } from '../../../../commons/ui/components/card';
 import { FilterList } from '../../../../commons/ui/components/filter-list';
@@ -27,14 +26,12 @@ export const CoffeeList = () => {
     <>
       <FilterList setFilters={setFilters} filters={filters} />
 
-      <div className="px-4 pb-4 flex items-center justify-between">
-        <h2 className="text-lg font-bold text-coffee-bean dark:text-slate-100">Popular Recipes</h2>
-        <button className="text-primary text-sm font-semibold">View All</button>
-      </div>
-
       <ErrorBoundaryCoffeeList onReset={handleRetry}>
         <Suspense fallback={<div>⏳ Loading coffee...</div>}>
           <List<Coffee>
+            title="Popular Recipes"
+            headerButtonText="View All"
+            onClickHeaderButton={() => console.log('Click View All')}
             key={retryKey}
             fetchData={fetchCoffee}
             RenderItem={data => <Card {...data} />}
